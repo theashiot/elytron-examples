@@ -1,0 +1,20 @@
+{
+    "client-id" : "myclient",
+    "provider-url" : "${env.OIDC_PROVIDER_URL:http://localhost:8080}/realms/myrealm",
+    "public-client" : "false",
+    "authentication-request-format" : "${env.AUTH_REQUEST_FORMAT:request}",
+    "request-object-signing-algorithm" : "RS256",
+    "request-object-encryption-alg-value" : "RSA-OAEP",
+    "request-object-encryption-enc-value" : "A256GCM",
+    "request-object-signing-keystore-file" : "${env.SIGNING_KEYSTORE_PATH}",
+    "request-object-signing-keystore-password" : "password",
+    "request-object-signing-key-password" : "password",
+    "request-object-signing-key-alias" : "rsaKey",
+    "request-object-signing-keystore-type" : "PKCS12",
+    "principal-attribute" : "preferred_username",
+    "ssl-required" : "EXTERNAL",
+    "scope" : "profile email roles web-origins microprofile-jwt offline_access",
+    "credentials" : {
+    	"secret" : "${env.OIDC_CLIENT_SECRET}"
+    }
+}
