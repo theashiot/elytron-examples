@@ -1,0 +1,24 @@
+build:
+  uri: https://github.com/wildfly-security-incubator/elytron-examples.git
+  contextDir: elytron-oidc-request
+deploy:
+  replicas: 1
+  env:
+    - name: OIDC_PROVIDER_URL
+      value: <KEYCLOAK_URL>
+    - name: OIDC_CLIENT_SECRET
+      value: <CLIENT_SECRET>
+    - name: AUTH_REQUEST_FORMAT
+      value: request
+    - name: SIGNING_KEYSTORE_PATH
+      value: /etc/request-object-secret-volume/Keycloak.keystore.pkcs12
+    - name: SERVER_ARGS
+      value: "--stability=preview"
+  volumes:
+    - name: request-object-signing-keystore-volume
+      secret:
+        secretName: simple-webapp-secret
+  volumeMounts:
+    - name: request-object-signing-keystore-volume
+      mountPath: /etc/request-object-secret-volume
+      readOnly: true
